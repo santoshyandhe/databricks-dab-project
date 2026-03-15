@@ -1,0 +1,36 @@
+resources:
+  jobs:
+    customer_pipeline_job:
+      name: "customer-pipeline-${bundle.target}"
+      description: "Ingest and transform customers"
+
+      tasks:
+        - task_key: ingest_customers
+          description: "Run ingestion notebook"
+          notebook_task:
+            notebook_path: ${workspace.file_path}/notebooks/ingest_customers
+            source: WORKSPACE
+          environment_key: serverless_env
+
+        - task_key: transform_customers
+          description: "Run transformation notebook"
+          depends_on:
+            - task_key: ingest_customers
+          notebook_task:
+            notebook_path: ${workspace.file_path}/notebooks/transform_customers
+            source: WORKSPACE
+          environment_key: serverless_env      # ← same serverless, no dbt needed
+
+      environments:
+        - environment_key: serverless_env
+          spec:
+            client: "1"
+
+      schedule:
+        quartz_cron_expression: "0 0 8 * * ?"
+        timezone_id: "America/Toronto"
+        pause_status: PAUSED
+
+      email_notifications:
+        on_failure:
+          - santoshyandheazure@gmail.com

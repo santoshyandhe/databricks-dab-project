@@ -1,0 +1,31 @@
+bundle:
+  name: databricks-dab-project
+
+variables:
+  catalog:
+    default: adb_workspace_dev_7405609302815556
+  dbt_schema:
+    default: default
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405609302815556.16.azuredatabricks.net
+    variables:
+      catalog: adb_workspace_dev_7405609302815556
+      dbt_schema: dev
+
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-YYYYYYYYYYYYYYYY.Y.azuredatabricks.net
+    variables:
+      catalog: deltalake_catalog
+      dbt_schema: prod
+
+
+
+
+include:
+- resources/*.yml
