@@ -5,7 +5,7 @@ databricks_profile:
       type: databricks
       host: https://adb-7405609302815556.16.azuredatabricks.net
       http_path: /sql/1.0/warehouses/<your-warehouse-id>
-      token: doseacdabd348bb387dde53aa0a75ab61249
+      token: **************
       catalog: adb_workspace_dev_7405609302815556
       schema: default
       threads: 4
