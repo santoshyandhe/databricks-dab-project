@@ -1,0 +1,7 @@
+version: 2
+sources:
+- name: default
+catalog: adb_workspace_dev_7405609302815556
+schema: default
+tables:
+- name: customer

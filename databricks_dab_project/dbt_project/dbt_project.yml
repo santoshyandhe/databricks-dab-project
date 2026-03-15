@@ -1,0 +1,11 @@
+name: dbt_project
+version: '1.0.0'
+config-version: 2
+profile: databricks_profile      # ← must match the key in profiles.yml exactly
+
+model-paths: ["models"]
+
+models:
+  dbt_project:
+    +materialized: table
+    +file_format: delta
